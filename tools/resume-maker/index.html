@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>履歴書メーカー — JIS規格の履歴書を無料作成</title>
+<meta name="description" content="JIS規格準拠の履歴書を無料作成。学歴・職歴・資格を入力してプレビュー・印刷。プレミアム版でウォーターマーク無しPDF。">
+<meta name="keywords" content="履歴書 作成 無料, 履歴書 テンプレート, 履歴書 PDF, JIS規格 履歴書">
+<link rel="canonical" href="https://micro-tools.vercel.app/tools/resume-maker/">
+<meta property="og:title" content="履歴書メーカー — JIS規格の履歴書を無料作成">
+<meta property="og:description" content="ブラウザだけで履歴書を作成。JIS規格準拠。無料。">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "履歴書メーカー",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "offers": [
+    {"@type": "Offer", "price": "0", "priceCurrency": "JPY", "description": "無料版（ウォーターマーク付き）"},
+    {"@type": "Offer", "price": "500", "priceCurrency": "JPY", "description": "プレミアム版（ウォーターマーク無し）"}
+  ]
+}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;color:#1a1a2e;background:#f8f9fa;line-height:1.6}
+header{background:linear-gradient(135deg,#0f3460,#16213e);color:#fff;padding:24px 20px;display:flex;align-items:center;gap:16px}
+header a{color:#fff;text-decoration:none;opacity:.7;font-size:.9rem}
+header h1{font-size:1.4rem}
+.container{max-width:900px;margin:0 auto;padding:24px 20px}
+.form-section{background:#fff;border-radius:10px;padding:28px;margin-bottom:24px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.form-section h2{font-size:1.1rem;color:#0f3460;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #e3e8f0}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px}
+.form-row.col3{grid-template-columns:1fr 1fr 1fr}
+.form-row.full{grid-template-columns:1fr}
+label{display:block;font-size:.85rem;font-weight:600;color:#555;margin-bottom:4px}
+input,textarea,select{width:100%;padding:10px 12px;border:1px solid #d0d5dd;border-radius:6px;font-size:.95rem;font-family:inherit}
+input:focus,textarea:focus{outline:none;border-color:#0f3460;box-shadow:0 0 0 3px rgba(15,52,96,.1)}
+.btn{padding:10px 20px;border:none;border-radius:6px;font-size:.9rem;font-weight:600;cursor:pointer;transition:background .2s}
+.btn-add{background:#e8f5e9;color:#2e7d32}.btn-add:hover{background:#c8e6c9}
+.btn-remove{background:#ffebee;color:#c62828;padding:6px 12px;font-size:.8rem}.btn-remove:hover{background:#ffcdd2}
+.btn-primary{background:#0f3460;color:#fff;padding:12px 32px;font-size:1rem}.btn-primary:hover{background:#1a4a8a}
+.btn-premium{background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;padding:12px 32px;font-size:1rem;text-decoration:none;display:inline-block;border-radius:6px;font-weight:600}.btn-premium:hover{opacity:.9}
+.actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:24px}
+.premium-note{font-size:.85rem;color:#888;margin-top:8px}
+.edu-entry,.work-entry,.cert-entry{background:#f8f9fa;padding:16px;border-radius:8px;margin-bottom:12px;position:relative}
+.edu-entry .btn-remove,.work-entry .btn-remove,.cert-entry .btn-remove{position:absolute;top:12px;right:12px}
+
+/* Resume Preview */
+#resume-preview{display:none}
+.resume{max-width:800px;margin:0 auto;padding:40px;background:#fff;font-size:13px;position:relative}
+.resume .watermark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-size:90px;color:rgba(200,0,0,.08);font-weight:900;pointer-events:none;z-index:10;letter-spacing:12px}
+.resume-title{text-align:center;font-size:24px;font-weight:700;letter-spacing:6px;margin-bottom:4px;border-bottom:3px double #333;padding-bottom:12px}
+.resume-date{text-align:right;font-size:12px;color:#555;margin-bottom:20px}
+.resume-photo-row{display:flex;gap:24px;margin-bottom:20px}
+.resume-basic{flex:1}
+.resume-photo{width:120px;height:160px;border:1px solid #ccc;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:11px;background:#fafafa}
+.r-table{width:100%;border-collapse:collapse;margin-bottom:20px}
+.r-table th,.r-table td{border:1px solid #999;padding:8px 10px;text-align:left;font-size:12px}
+.r-table th{background:#f0f0f0;font-weight:600;width:120px;white-space:nowrap}
+.r-section{font-size:14px;font-weight:700;background:#f0f0f0;padding:6px 10px;border:1px solid #999;margin-bottom:0}
+.ad-space{text-align:center;margin:24px 0}
+
+@media print{
+  body{background:#fff}
+  header,.container:not(#resume-preview),.actions,.ad-space,.premium-note,.btn,footer,.no-print{display:none!important}
+  #resume-preview{display:block!important}
+  .resume{padding:20px;box-shadow:none}
+}
+footer{text-align:center;padding:40px 20px;color:#888;font-size:.85rem}
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5536232737607009" crossorigin="anonymous"></script>
+</head>
+<body>
+<header>
+  <a href="../../">&larr; ツール一覧</a>
+  <h1>履歴書メーカー</h1>
+</header>
+<div class="container" id="form-area">
+  <!-- Basic Info -->
+  <div class="form-section">
+    <h2>基本情報</h2>
+    <div class="form-row">
+      <div><label>氏名（漢字）</label><input type="text" id="r-name" placeholder="山田 太郎"></div>
+      <div><label>ふりがな</label><input type="text" id="r-furigana" placeholder="やまだ たろう"></div>
+    </div>
+    <div class="form-row col3">
+      <div><label>生年月日</label><input type="date" id="r-birthday"></div>
+      <div><label>性別</label><select id="r-gender"><option>男</option><option>女</option><option>その他</option><option>回答しない</option></select></div>
+      <div><label>電話番号</label><input type="text" id="r-tel" placeholder="090-1234-5678"></div>
+    </div>
+    <div class="form-row">
+      <div><label>メールアドレス</label><input type="email" id="r-email" placeholder="taro@example.com"></div>
+      <div><label>最寄り駅</label><input type="text" id="r-station" placeholder="JR山手線 渋谷駅"></div>
+    </div>
+    <div class="form-row full">
+      <div><label>住所</label><input type="text" id="r-address" placeholder="〒150-0001 東京都渋谷区..."></div>
+    </div>
+  </div>
+
+  <!-- Education -->
+  <div class="form-section">
+    <h2>学歴</h2>
+    <div id="edu-list">
+      <div class="edu-entry">
+        <div class="form-row">
+          <div><label>年月</label><input type="text" class="edu-date" placeholder="2015年3月"></div>
+          <div><label>学歴</label><input type="text" class="edu-detail" placeholder="○○大学 △△学部 卒業"></div>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-add" onclick="addEdu()">＋ 学歴を追加</button>
+  </div>
+
+  <!-- Work -->
+  <div class="form-section">
+    <h2>職歴</h2>
+    <div id="work-list">
+      <div class="work-entry">
+        <div class="form-row">
+          <div><label>年月</label><input type="text" class="work-date" placeholder="2015年4月"></div>
+          <div><label>職歴</label><input type="text" class="work-detail" placeholder="株式会社○○ 入社"></div>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-add" onclick="addWork()">＋ 職歴を追加</button>
+  </div>
+
+  <!-- Certifications -->
+  <div class="form-section">
+    <h2>免許・資格</h2>
+    <div id="cert-list">
+      <div class="cert-entry">
+        <div class="form-row">
+          <div><label>年月</label><input type="text" class="cert-date" placeholder="2016年6月"></div>
+          <div><label>免許・資格名</label><input type="text" class="cert-detail" placeholder="普通自動車免許 取得"></div>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-add" onclick="addCert()">＋ 資格を追加</button>
+  </div>
+
+  <!-- Motivation -->
+  <div class="form-section">
+    <h2>志望動機・自己PR</h2>
+    <div class="form-row full">
+      <textarea id="r-motivation" rows="5" placeholder="志望動機やアピールポイントを記入してください。"></textarea>
+    </div>
+  </div>
+
+  <!-- Preferences -->
+  <div class="form-section">
+    <h2>本人希望欄</h2>
+    <div class="form-row full">
+      <textarea id="r-preferences" rows="3" placeholder="勤務地・給与・勤務時間などの希望があれば記入してください。"></textarea>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-primary" onclick="previewResume()">プレビュー &amp; 印刷（無料・透かし付き）</button>
+    <a href="https://buy.stripe.com/fZu5kwcag1dm7NT6DqaVa05" class="btn-premium" target="_blank">¥500 でプレミアムPDF（透かし無し）</a>
+  </div>
+  <p class="premium-note">※ 無料版はプレビュー・印刷時に「SAMPLE」透かしが入ります。</p>
+</div>
+
+<div id="resume-preview">
+  <div class="resume" id="resume-doc">
+    <div class="watermark" id="r-watermark">SAMPLE</div>
+    <div class="resume-title">履 歴 書</div>
+    <div class="resume-date" id="r-p-date"></div>
+    <div class="resume-photo-row">
+      <div class="resume-basic">
+        <table class="r-table">
+          <tr><th>ふりがな</th><td id="r-p-furigana" colspan="3"></td></tr>
+          <tr><th>氏名</th><td id="r-p-name" colspan="3" style="font-size:16px;font-weight:700"></td></tr>
+          <tr><th>生年月日</th><td id="r-p-birthday"></td><th>性別</th><td id="r-p-gender"></td></tr>
+          <tr><th>住所</th><td id="r-p-address" colspan="3"></td></tr>
+          <tr><th>電話番号</th><td id="r-p-tel"></td><th>メール</th><td id="r-p-email"></td></tr>
+          <tr><th>最寄り駅</th><td id="r-p-station" colspan="3"></td></tr>
+        </table>
+      </div>
+      <div class="resume-photo">写真貼付<br>30x40mm</div>
+    </div>
+
+    <div class="r-section">学歴</div>
+    <table class="r-table" id="r-p-edu">
+      <tr><th style="width:140px">年月</th><th>学歴</th></tr>
+    </table>
+
+    <div class="r-section">職歴</div>
+    <table class="r-table" id="r-p-work">
+      <tr><th style="width:140px">年月</th><th>職歴</th></tr>
+    </table>
+
+    <div class="r-section">免許・資格</div>
+    <table class="r-table" id="r-p-cert">
+      <tr><th style="width:140px">年月</th><th>免許・資格</th></tr>
+    </table>
+
+    <div class="r-section">志望動機・自己PR</div>
+    <div style="border:1px solid #999;padding:12px;min-height:80px;font-size:13px;white-space:pre-wrap" id="r-p-motivation"></div>
+
+    <div class="r-section" style="margin-top:12px">本人希望欄</div>
+    <div style="border:1px solid #999;padding:12px;min-height:60px;font-size:13px;white-space:pre-wrap" id="r-p-preferences"></div>
+  </div>
+  <div style="text-align:center;padding:24px" class="no-print">
+    <button class="btn btn-primary" onclick="window.print()">この内容を印刷 / PDF保存</button>
+    <button class="btn" style="background:#eee;margin-left:12px" onclick="backToResumeForm()">フォームに戻る</button>
+    <div style="margin-top:16px">
+      <a href="https://buy.stripe.com/fZu5kwcag1dm7NT6DqaVa05" class="btn-premium" target="_blank">¥500 で透かし無し版を取得</a>
+    </div>
+  </div>
+</div>
+
+<div class="container ad-space">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5536232737607009" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+</div>
+<footer><p>&copy; 2026 便利ツール &mdash; <a href="../../">トップに戻る</a></p></footer>
+
+<script>
+function addEdu(){
+  const d=document.createElement('div');d.className='edu-entry';
+  d.innerHTML='<button class="btn btn-remove" onclick="this.parentElement.remove()">削除</button><div class="form-row"><div><label>年月</label><input type="text" class="edu-date" placeholder="2015年3月"></div><div><label>学歴</label><input type="text" class="edu-detail" placeholder="○○大学 卒業"></div></div>';
+  document.getElementById('edu-list').appendChild(d);
+}
+function addWork(){
+  const d=document.createElement('div');d.className='work-entry';
+  d.innerHTML='<button class="btn btn-remove" onclick="this.parentElement.remove()">削除</button><div class="form-row"><div><label>年月</label><input type="text" class="work-date" placeholder="2015年4月"></div><div><label>職歴</label><input type="text" class="work-detail" placeholder="株式会社○○ 入社"></div></div>';
+  document.getElementById('work-list').appendChild(d);
+}
+function addCert(){
+  const d=document.createElement('div');d.className='cert-entry';
+  d.innerHTML='<button class="btn btn-remove" onclick="this.parentElement.remove()">削除</button><div class="form-row"><div><label>年月</label><input type="text" class="cert-date" placeholder="2016年6月"></div><div><label>免許・資格名</label><input type="text" class="cert-detail" placeholder="TOEIC 800点 取得"></div></div>';
+  document.getElementById('cert-list').appendChild(d);
+}
+function previewResume(){
+  const params = new URLSearchParams(window.location.search);
+  const isPremium = params.has('premium');
+
+  const today = new Date();
+  document.getElementById('r-p-date').textContent = today.getFullYear()+'年'+(today.getMonth()+1)+'月'+today.getDate()+'日現在';
+  document.getElementById('r-p-name').textContent = document.getElementById('r-name').value;
+  document.getElementById('r-p-furigana').textContent = document.getElementById('r-furigana').value;
+  document.getElementById('r-p-birthday').textContent = document.getElementById('r-birthday').value;
+  document.getElementById('r-p-gender').textContent = document.getElementById('r-gender').value;
+  document.getElementById('r-p-tel').textContent = document.getElementById('r-tel').value;
+  document.getElementById('r-p-email').textContent = document.getElementById('r-email').value;
+  document.getElementById('r-p-address').textContent = document.getElementById('r-address').value;
+  document.getElementById('r-p-station').textContent = document.getElementById('r-station').value;
+  document.getElementById('r-p-motivation').textContent = document.getElementById('r-motivation').value;
+  document.getElementById('r-p-preferences').textContent = document.getElementById('r-preferences').value;
+
+  // Education
+  const eduTable = document.getElementById('r-p-edu');
+  eduTable.innerHTML = '<tr><th style="width:140px">年月</th><th>学歴</th></tr>';
+  document.querySelectorAll('.edu-entry').forEach(e=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = '<td>'+e.querySelector('.edu-date').value+'</td><td>'+e.querySelector('.edu-detail').value+'</td>';
+    eduTable.appendChild(tr);
+  });
+
+  // Work
+  const workTable = document.getElementById('r-p-work');
+  workTable.innerHTML = '<tr><th style="width:140px">年月</th><th>職歴</th></tr>';
+  document.querySelectorAll('.work-entry').forEach(e=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = '<td>'+e.querySelector('.work-date').value+'</td><td>'+e.querySelector('.work-detail').value+'</td>';
+    workTable.appendChild(tr);
+  });
+
+  // Certs
+  const certTable = document.getElementById('r-p-cert');
+  certTable.innerHTML = '<tr><th style="width:140px">年月</th><th>免許・資格</th></tr>';
+  document.querySelectorAll('.cert-entry').forEach(e=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = '<td>'+e.querySelector('.cert-date').value+'</td><td>'+e.querySelector('.cert-detail').value+'</td>';
+    certTable.appendChild(tr);
+  });
+
+  document.getElementById('r-watermark').style.display = isPremium ? 'none' : 'block';
+  document.getElementById('form-area').style.display = 'none';
+  document.getElementById('resume-preview').style.display = 'block';
+}
+function backToResumeForm(){
+  document.getElementById('form-area').style.display = 'block';
+  document.getElementById('resume-preview').style.display = 'none';
+}
+</script>
+</body>
+</html>

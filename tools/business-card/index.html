@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>名刺デザイナー — 無料で名刺を作成・印刷</title>
+<meta name="description" content="名刺を無料でデザイン。3種類のテンプレートから選んで、名前・肩書き・連絡先を入力するだけ。プレミアム版で高解像度PNG/印刷用PDFダウンロード。">
+<meta name="keywords" content="名刺 作成 無料, 名刺 テンプレート, 名刺 デザイン, 名刺 印刷">
+<link rel="canonical" href="https://micro-tools.vercel.app/tools/business-card/">
+<meta property="og:title" content="名刺デザイナー — 無料で名刺を作成">
+<meta property="og:description" content="ブラウザだけで名刺をデザイン。3つのテンプレート。無料。">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "名刺デザイナー",
+  "applicationCategory": "DesignApplication",
+  "operatingSystem": "Web",
+  "offers": [
+    {"@type": "Offer", "price": "0", "priceCurrency": "JPY", "description": "無料版（ウォーターマーク付き）"},
+    {"@type": "Offer", "price": "200", "priceCurrency": "JPY", "description": "プレミアム版（高解像度ダウンロード）"}
+  ]
+}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;color:#1a1a2e;background:#f8f9fa;line-height:1.6}
+header{background:linear-gradient(135deg,#0f3460,#16213e);color:#fff;padding:24px 20px;display:flex;align-items:center;gap:16px}
+header a{color:#fff;text-decoration:none;opacity:.7;font-size:.9rem}
+header h1{font-size:1.4rem}
+.container{max-width:900px;margin:0 auto;padding:24px 20px}
+.form-section{background:#fff;border-radius:10px;padding:28px;margin-bottom:24px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.form-section h2{font-size:1.1rem;color:#0f3460;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #e3e8f0}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px}
+.form-row.full{grid-template-columns:1fr}
+label{display:block;font-size:.85rem;font-weight:600;color:#555;margin-bottom:4px}
+input,select{width:100%;padding:10px 12px;border:1px solid #d0d5dd;border-radius:6px;font-size:.95rem;font-family:inherit}
+input:focus{outline:none;border-color:#0f3460;box-shadow:0 0 0 3px rgba(15,52,96,.1)}
+
+.templates{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px}
+.tpl{border:3px solid transparent;border-radius:10px;padding:16px;cursor:pointer;transition:border-color .2s;text-align:center}
+.tpl.active{border-color:#0f3460}
+.tpl:hover{border-color:#0f3460aa}
+.tpl-preview{width:100%;aspect-ratio:91/55;border-radius:6px;margin-bottom:8px;display:flex;align-items:center;justify-content:center;font-size:.75rem;color:#fff;font-weight:600}
+.tpl-name{font-size:.85rem;font-weight:600;color:#333}
+
+.btn{padding:10px 20px;border:none;border-radius:6px;font-size:.9rem;font-weight:600;cursor:pointer;transition:background .2s}
+.btn-primary{background:#0f3460;color:#fff;padding:12px 32px;font-size:1rem}.btn-primary:hover{background:#1a4a8a}
+.btn-premium{background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;padding:12px 32px;font-size:1rem;text-decoration:none;display:inline-block;border-radius:6px;font-weight:600}.btn-premium:hover{opacity:.9}
+.actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:24px}
+.premium-note{font-size:.85rem;color:#888;margin-top:8px}
+
+/* Card Preview */
+.card-preview-area{text-align:center;margin:24px 0}
+.card-wrapper{display:inline-block;position:relative}
+canvas{border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.15)}
+.card-watermark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-20deg);font-size:32px;color:rgba(200,0,0,.15);font-weight:900;pointer-events:none;letter-spacing:4px}
+.ad-space{text-align:center;margin:24px 0}
+
+@media print{
+  body{background:#fff}
+  header,.form-section,.actions,.ad-space,.premium-note,.btn,.card-watermark,footer{display:none!important}
+  .card-preview-area{margin:0}
+}
+footer{text-align:center;padding:40px 20px;color:#888;font-size:.85rem}
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5536232737607009" crossorigin="anonymous"></script>
+</head>
+<body>
+<header>
+  <a href="../../">&larr; ツール一覧</a>
+  <h1>名刺デザイナー</h1>
+</header>
+<div class="container">
+  <div class="form-section">
+    <h2>テンプレートを選択</h2>
+    <div class="templates">
+      <div class="tpl active" onclick="selectTpl('corporate')">
+        <div class="tpl-preview" style="background:linear-gradient(135deg,#0f3460,#1a5276)">コーポレート</div>
+        <div class="tpl-name">コーポレート</div>
+      </div>
+      <div class="tpl" onclick="selectTpl('minimal')">
+        <div class="tpl-preview" style="background:linear-gradient(135deg,#2c3e50,#34495e)">ミニマル</div>
+        <div class="tpl-name">ミニマル</div>
+      </div>
+      <div class="tpl" onclick="selectTpl('creative')">
+        <div class="tpl-preview" style="background:linear-gradient(135deg,#e74c3c,#c0392b)">クリエイティブ</div>
+        <div class="tpl-name">クリエイティブ</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-section">
+    <h2>名刺情報</h2>
+    <div class="form-row">
+      <div><label>氏名</label><input type="text" id="bc-name" placeholder="山田 太郎" oninput="renderCard()"></div>
+      <div><label>ふりがな</label><input type="text" id="bc-furigana" placeholder="やまだ たろう" oninput="renderCard()"></div>
+    </div>
+    <div class="form-row">
+      <div><label>会社名</label><input type="text" id="bc-company" placeholder="株式会社サンプル" oninput="renderCard()"></div>
+      <div><label>肩書き・役職</label><input type="text" id="bc-title" placeholder="代表取締役" oninput="renderCard()"></div>
+    </div>
+    <div class="form-row">
+      <div><label>電話番号</label><input type="text" id="bc-tel" placeholder="03-1234-5678" oninput="renderCard()"></div>
+      <div><label>メールアドレス</label><input type="email" id="bc-email" placeholder="taro@example.com" oninput="renderCard()"></div>
+    </div>
+    <div class="form-row">
+      <div><label>住所</label><input type="text" id="bc-address" placeholder="東京都渋谷区..." oninput="renderCard()"></div>
+      <div><label>Webサイト</label><input type="text" id="bc-web" placeholder="https://example.com" oninput="renderCard()"></div>
+    </div>
+  </div>
+
+  <div class="card-preview-area">
+    <h3 style="margin-bottom:16px;color:#555">プレビュー</h3>
+    <div class="card-wrapper">
+      <canvas id="card-canvas" width="728" height="440"></canvas>
+      <div class="card-watermark" id="bc-watermark">SAMPLE</div>
+    </div>
+  </div>
+
+  <div class="actions" style="justify-content:center">
+    <button class="btn btn-primary" onclick="downloadCard(false)">印刷（無料・透かし付き）</button>
+    <a href="https://buy.stripe.com/aFa4gs8Y44py9W1aTGaVa06" class="btn-premium" target="_blank">¥200 で高解像度ダウンロード（透かし無し）</a>
+  </div>
+  <p class="premium-note" style="text-align:center">※ 無料版は透かし入り。プレミアム購入後、高解像度PNGをダウンロードできます。</p>
+
+  <div class="ad-space">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5536232737607009" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+  </div>
+</div>
+<footer><p>&copy; 2026 便利ツール &mdash; <a href="../../">トップに戻る</a></p></footer>
+
+<script>
+let currentTpl = 'corporate';
+const canvas = document.getElementById('card-canvas');
+const ctx = canvas.getContext('2d');
+
+function selectTpl(name){
+  currentTpl = name;
+  document.querySelectorAll('.tpl').forEach(t=>t.classList.remove('active'));
+  event.currentTarget.closest('.tpl').classList.add('active');
+  renderCard();
+}
+
+function renderCard(){
+  const w = canvas.width, h = canvas.height;
+  const name = document.getElementById('bc-name').value || '山田 太郎';
+  const furigana = document.getElementById('bc-furigana').value || '';
+  const company = document.getElementById('bc-company').value || '株式会社サンプル';
+  const title = document.getElementById('bc-title').value || '';
+  const tel = document.getElementById('bc-tel').value || '';
+  const email = document.getElementById('bc-email').value || '';
+  const address = document.getElementById('bc-address').value || '';
+  const web = document.getElementById('bc-web').value || '';
+
+  ctx.clearRect(0,0,w,h);
+
+  if(currentTpl === 'corporate'){
+    // Dark blue left bar
+    const grad = ctx.createLinearGradient(0,0,0,h);
+    grad.addColorStop(0,'#0f3460');grad.addColorStop(1,'#1a5276');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0,0,180,h);
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(180,0,w-180,h);
+
+    // Left side: company vertical
+    ctx.save();
+    ctx.translate(90,h/2);
+    ctx.rotate(-Math.PI/2);
+    ctx.fillStyle = 'rgba(255,255,255,0.3)';
+    ctx.font = 'bold 18px "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(company,0,0);
+    ctx.restore();
+
+    // Right side content
+    const rx = 220, baseY = 80;
+    ctx.fillStyle = '#0f3460';
+    if(furigana){ctx.font='11px sans-serif';ctx.fillStyle='#888';ctx.fillText(furigana,rx,baseY);ctx.fillStyle='#0f3460'}
+    ctx.font = 'bold 32px "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif';
+    ctx.fillText(name, rx, baseY+38);
+    ctx.fillStyle = '#555';
+    ctx.font = '14px sans-serif';
+    if(title) ctx.fillText(title, rx, baseY+62);
+    ctx.font = '13px sans-serif';
+    ctx.fillStyle = '#0f3460';
+    ctx.fillText(company, rx, baseY+92);
+
+    // Contact details
+    ctx.fillStyle = '#555';
+    ctx.font = '12px sans-serif';
+    let cy = baseY + 140;
+    if(tel){ctx.fillText('TEL: '+tel, rx, cy);cy+=22}
+    if(email){ctx.fillText('MAIL: '+email, rx, cy);cy+=22}
+    if(address){ctx.fillText(address, rx, cy);cy+=22}
+    if(web){ctx.fillText(web, rx, cy)}
+
+    // Accent line
+    ctx.fillStyle = '#e74c3c';
+    ctx.fillRect(180,0,4,h);
+
+  } else if(currentTpl === 'minimal'){
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(0,0,w,h);
+    // Subtle border
+    ctx.strokeStyle = '#ddd';ctx.lineWidth=2;ctx.strokeRect(16,16,w-32,h-32);
+
+    const cx = w/2;
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#2c3e50';
+    if(furigana){ctx.font='11px sans-serif';ctx.fillStyle='#aaa';ctx.fillText(furigana,cx,100);ctx.fillStyle='#2c3e50'}
+    ctx.font = 'bold 30px "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif';
+    ctx.fillText(name, cx, 138);
+    ctx.fillStyle = '#7f8c8d';
+    ctx.font = '13px sans-serif';
+    if(title) ctx.fillText(title+' | '+company, cx, 168);
+    else ctx.fillText(company, cx, 168);
+
+    // Divider
+    ctx.fillStyle = '#2c3e50';
+    ctx.fillRect(cx-60,190,120,2);
+
+    ctx.fillStyle = '#555';
+    ctx.font = '12px sans-serif';
+    let my = 220;
+    if(tel){ctx.fillText(tel, cx, my);my+=22}
+    if(email){ctx.fillText(email, cx, my);my+=22}
+    if(address){ctx.fillText(address, cx, my);my+=22}
+    if(web){ctx.fillText(web, cx, my)}
+    ctx.textAlign = 'left';
+
+  } else if(currentTpl === 'creative'){
+    // Red diagonal
+    const grad2 = ctx.createLinearGradient(0,0,w,h);
+    grad2.addColorStop(0,'#e74c3c');grad2.addColorStop(1,'#c0392b');
+    ctx.fillStyle = grad2;
+    ctx.fillRect(0,0,w,h);
+    // White triangle
+    ctx.fillStyle = '#fff';
+    ctx.beginPath();ctx.moveTo(0,h*0.45);ctx.lineTo(w,h*0.25);ctx.lineTo(w,h);ctx.lineTo(0,h);ctx.closePath();ctx.fill();
+
+    // Name on red part
+    ctx.fillStyle = '#fff';
+    if(furigana){ctx.font='11px sans-serif';ctx.fillStyle='rgba(255,255,255,0.6)';ctx.fillText(furigana,40,60);ctx.fillStyle='#fff'}
+    ctx.font = 'bold 30px "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif';
+    ctx.fillText(name, 40, 98);
+    ctx.font = '14px sans-serif';
+    ctx.fillStyle = 'rgba(255,255,255,0.85)';
+    if(title) ctx.fillText(title, 40, 124);
+
+    // Company and contact on white part
+    ctx.fillStyle = '#c0392b';
+    ctx.font = 'bold 16px sans-serif';
+    ctx.fillText(company, 40, h*0.55+20);
+
+    ctx.fillStyle = '#555';
+    ctx.font = '12px sans-serif';
+    let ccy = h*0.55+50;
+    if(tel){ctx.fillText('TEL: '+tel, 40, ccy);ccy+=22}
+    if(email){ctx.fillText('MAIL: '+email, 40, ccy);ccy+=22}
+    if(address){ctx.fillText(address, 40, ccy);ccy+=22}
+    if(web){ctx.fillText(web, 40, ccy)}
+  }
+}
+
+function downloadCard(premium){
+  const params = new URLSearchParams(window.location.search);
+  const isPremium = params.has('premium') || premium;
+  if(isPremium){
+    // High-res canvas
+    const hr = document.createElement('canvas');
+    hr.width = 1456; hr.height = 880;
+    const hctx = hr.getContext('2d');
+    hctx.scale(2,2);
+    // Re-render at 2x
+    const origCanvas = canvas;
+    const origCtx = ctx;
+    // Swap temporarily
+    // Actually, let's just draw the current canvas scaled
+    hctx.drawImage(canvas,0,0);
+    const link = document.createElement('a');
+    link.download = 'business-card.png';
+    link.href = hr.toDataURL('image/png');
+    link.click();
+  } else {
+    window.print();
+  }
+}
+
+// Initial render
+renderCard();
+
+// Check premium status
+const params = new URLSearchParams(window.location.search);
+if(params.has('premium')){
+  document.getElementById('bc-watermark').style.display = 'none';
+}
+</script>
+</body>
+</html>

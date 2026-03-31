@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>請求書PDF作成ツール — 無料で請求書を作成・印刷</title>
+<meta name="description" content="請求書を無料で作成。取引先・品目・税率を入力してすぐにプレビュー・印刷。プレミアム版でウォーターマーク無しPDFダウンロード。">
+<meta name="keywords" content="請求書 作成 無料, 請求書 PDF, 請求書 テンプレート, インボイス 作成">
+<link rel="canonical" href="https://micro-tools.vercel.app/tools/invoice-pdf/">
+<meta property="og:title" content="請求書PDF作成ツール — 無料で請求書を作成">
+<meta property="og:description" content="ブラウザだけで請求書を作成・印刷。無料。">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "請求書PDF作成ツール",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "offers": [
+    {"@type": "Offer", "price": "0", "priceCurrency": "JPY", "description": "無料版（ウォーターマーク付き）"},
+    {"@type": "Offer", "price": "300", "priceCurrency": "JPY", "description": "プレミアム版（ウォーターマーク無し）"}
+  ]
+}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;color:#1a1a2e;background:#f8f9fa;line-height:1.6}
+header{background:linear-gradient(135deg,#0f3460,#16213e);color:#fff;padding:24px 20px;display:flex;align-items:center;gap:16px}
+header a{color:#fff;text-decoration:none;opacity:.7;font-size:.9rem}
+header h1{font-size:1.4rem}
+.container{max-width:900px;margin:0 auto;padding:24px 20px}
+.form-section{background:#fff;border-radius:10px;padding:28px;margin-bottom:24px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.form-section h2{font-size:1.1rem;color:#0f3460;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #e3e8f0}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px}
+.form-row.full{grid-template-columns:1fr}
+label{display:block;font-size:.85rem;font-weight:600;color:#555;margin-bottom:4px}
+input,textarea,select{width:100%;padding:10px 12px;border:1px solid #d0d5dd;border-radius:6px;font-size:.95rem;font-family:inherit}
+input:focus,textarea:focus{outline:none;border-color:#0f3460;box-shadow:0 0 0 3px rgba(15,52,96,.1)}
+.items-table{width:100%;border-collapse:collapse;margin-top:12px}
+.items-table th{text-align:left;padding:8px 10px;background:#f0f3f8;font-size:.8rem;color:#555;font-weight:600}
+.items-table td{padding:6px 4px}
+.items-table input{padding:8px;font-size:.9rem}
+.btn{padding:10px 20px;border:none;border-radius:6px;font-size:.9rem;font-weight:600;cursor:pointer;transition:background .2s}
+.btn-add{background:#e8f5e9;color:#2e7d32}.btn-add:hover{background:#c8e6c9}
+.btn-remove{background:#ffebee;color:#c62828;padding:6px 12px;font-size:.8rem}.btn-remove:hover{background:#ffcdd2}
+.btn-primary{background:#0f3460;color:#fff;padding:12px 32px;font-size:1rem}.btn-primary:hover{background:#1a4a8a}
+.btn-premium{background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;padding:12px 32px;font-size:1rem;text-decoration:none;display:inline-block;border-radius:6px;font-weight:600}.btn-premium:hover{opacity:.9}
+.actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:24px}
+.premium-note{font-size:.85rem;color:#888;margin-top:8px}
+
+/* Preview / Print area */
+#invoice-preview{display:none}
+.invoice{max-width:800px;margin:0 auto;padding:48px;background:#fff;font-size:14px;position:relative}
+.invoice .watermark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-size:100px;color:rgba(200,0,0,.08);font-weight:900;pointer-events:none;z-index:10;letter-spacing:12px}
+.invoice-header{display:flex;justify-content:space-between;margin-bottom:32px}
+.invoice-title{font-size:28px;font-weight:700;color:#0f3460;letter-spacing:2px}
+.invoice-meta{text-align:right;color:#555;font-size:13px;line-height:1.8}
+.invoice-parties{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-bottom:32px}
+.party h3{font-size:12px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.party .name{font-size:18px;font-weight:700;margin-bottom:4px}
+.party .detail{font-size:13px;color:#555;line-height:1.6}
+.inv-table{width:100%;border-collapse:collapse;margin-bottom:24px}
+.inv-table th{background:#0f3460;color:#fff;padding:10px 12px;text-align:left;font-size:12px;font-weight:600}
+.inv-table td{padding:10px 12px;border-bottom:1px solid #eee;font-size:13px}
+.inv-table tr:nth-child(even){background:#f8f9fa}
+.inv-totals{text-align:right;margin-top:16px}
+.inv-totals .row{display:flex;justify-content:flex-end;gap:40px;padding:4px 0;font-size:14px}
+.inv-totals .total{font-size:20px;font-weight:700;color:#0f3460;border-top:2px solid #0f3460;padding-top:8px;margin-top:8px}
+.inv-notes{margin-top:32px;padding-top:16px;border-top:1px solid #eee;font-size:12px;color:#888}
+
+.ad-space{text-align:center;margin:24px 0}
+
+@media print{
+  body{background:#fff}
+  header,.form-section,.actions,.ad-space,.premium-note,.btn,footer{display:none!important}
+  #invoice-preview{display:block!important}
+  .invoice{padding:24px;box-shadow:none}
+}
+footer{text-align:center;padding:40px 20px;color:#888;font-size:.85rem}
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5536232737607009" crossorigin="anonymous"></script>
+</head>
+<body>
+<header>
+  <a href="../../">&larr; ツール一覧</a>
+  <h1>請求書PDF作成ツール</h1>
+</header>
+<div class="container" id="form-area">
+  <div class="form-section">
+    <h2>請求書情報</h2>
+    <div class="form-row">
+      <div><label>請求書番号</label><input type="text" id="inv-number" value="INV-001"></div>
+      <div><label>発行日</label><input type="date" id="inv-date"></div>
+    </div>
+    <div class="form-row">
+      <div><label>支払期限</label><input type="date" id="inv-due"></div>
+      <div><label>消費税率（%）</label><input type="number" id="inv-tax" value="10" min="0" max="100"></div>
+    </div>
+  </div>
+  <div class="form-section">
+    <h2>請求元（自社）</h2>
+    <div class="form-row">
+      <div><label>会社名 / 氏名</label><input type="text" id="from-name" placeholder="株式会社サンプル"></div>
+      <div><label>担当者</label><input type="text" id="from-person" placeholder="山田太郎"></div>
+    </div>
+    <div class="form-row full">
+      <div><label>住所</label><input type="text" id="from-address" placeholder="東京都渋谷区..."></div>
+    </div>
+    <div class="form-row">
+      <div><label>電話番号</label><input type="text" id="from-tel" placeholder="03-1234-5678"></div>
+      <div><label>メール</label><input type="email" id="from-email" placeholder="info@example.com"></div>
+    </div>
+    <div class="form-row full">
+      <div><label>振込先</label><input type="text" id="from-bank" placeholder="○○銀行 △△支店 普通 1234567"></div>
+    </div>
+  </div>
+  <div class="form-section">
+    <h2>請求先（取引先）</h2>
+    <div class="form-row">
+      <div><label>会社名 / 氏名</label><input type="text" id="to-name" placeholder="株式会社クライアント"></div>
+      <div><label>担当者</label><input type="text" id="to-person" placeholder="鈴木一郎"></div>
+    </div>
+    <div class="form-row full">
+      <div><label>住所</label><input type="text" id="to-address" placeholder="大阪府大阪市..."></div>
+    </div>
+  </div>
+  <div class="form-section">
+    <h2>品目</h2>
+    <table class="items-table">
+      <thead><tr><th>品名</th><th style="width:100px">数量</th><th style="width:120px">単価（円）</th><th style="width:60px"></th></tr></thead>
+      <tbody id="items-body">
+        <tr>
+          <td><input type="text" class="item-name" placeholder="Webサイト制作"></td>
+          <td><input type="number" class="item-qty" value="1" min="1"></td>
+          <td><input type="number" class="item-price" value="50000" min="0"></td>
+          <td><button class="btn btn-remove" onclick="removeItem(this)">削除</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-add" onclick="addItem()" style="margin-top:12px">＋ 品目を追加</button>
+  </div>
+  <div class="form-section">
+    <h2>備考</h2>
+    <div class="form-row full">
+      <textarea id="inv-notes" rows="3" placeholder="お支払いに関する注意事項など"></textarea>
+    </div>
+  </div>
+  <div class="actions">
+    <button class="btn btn-primary" onclick="preview()">プレビュー &amp; 印刷（無料・透かし付き）</button>
+    <a href="https://buy.stripe.com/cNifZa3DKbS02tz9PCaVa04" class="btn-premium" target="_blank">¥300 でプレミアムPDF（透かし無し）</a>
+  </div>
+  <p class="premium-note">※ 無料版はプレビュー・印刷時に「SAMPLE」透かしが入ります。プレミアム購入後、透かし無しで再印刷できます。</p>
+</div>
+
+<div id="invoice-preview">
+  <div class="invoice" id="invoice-doc">
+    <div class="watermark" id="watermark-text">SAMPLE</div>
+    <div class="invoice-header">
+      <div class="invoice-title">請 求 書</div>
+      <div class="invoice-meta">
+        <div>No. <span id="p-number"></span></div>
+        <div>発行日: <span id="p-date"></span></div>
+        <div>支払期限: <span id="p-due"></span></div>
+      </div>
+    </div>
+    <div class="invoice-parties">
+      <div class="party">
+        <h3>請求先</h3>
+        <div class="name" id="p-to-name"></div>
+        <div class="detail"><span id="p-to-person"></span></div>
+        <div class="detail" id="p-to-address"></div>
+      </div>
+      <div class="party">
+        <h3>請求元</h3>
+        <div class="name" id="p-from-name"></div>
+        <div class="detail" id="p-from-person"></div>
+        <div class="detail" id="p-from-address"></div>
+        <div class="detail" id="p-from-tel"></div>
+        <div class="detail" id="p-from-email"></div>
+      </div>
+    </div>
+    <table class="inv-table">
+      <thead><tr><th>品名</th><th style="width:80px;text-align:right">数量</th><th style="width:120px;text-align:right">単価</th><th style="width:120px;text-align:right">金額</th></tr></thead>
+      <tbody id="p-items"></tbody>
+    </table>
+    <div class="inv-totals">
+      <div class="row"><span>小計</span><span id="p-subtotal"></span></div>
+      <div class="row"><span>消費税（<span id="p-tax-rate"></span>%）</span><span id="p-tax"></span></div>
+      <div class="row total"><span>合計</span><span id="p-total"></span></div>
+    </div>
+    <div class="inv-notes">
+      <strong>振込先:</strong> <span id="p-bank"></span><br>
+      <span id="p-notes"></span>
+    </div>
+  </div>
+  <div style="text-align:center;padding:24px" class="no-print">
+    <button class="btn btn-primary" onclick="window.print()">この内容を印刷 / PDF保存</button>
+    <button class="btn" style="background:#eee;margin-left:12px" onclick="backToForm()">フォームに戻る</button>
+    <div style="margin-top:16px">
+      <a href="https://buy.stripe.com/cNifZa3DKbS02tz9PCaVa04" class="btn-premium" target="_blank">¥300 で透かし無し版を取得</a>
+    </div>
+  </div>
+</div>
+
+<div class="container ad-space">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5536232737607009" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+</div>
+<footer><p>&copy; 2026 便利ツール &mdash; <a href="../../">トップに戻る</a></p></footer>
+
+<script>
+// Set today as default date
+const today = new Date().toISOString().split('T')[0];
+document.getElementById('inv-date').value = today;
+const due = new Date(); due.setDate(due.getDate()+30);
+document.getElementById('inv-due').value = due.toISOString().split('T')[0];
+
+function addItem(){
+  const tr = document.createElement('tr');
+  tr.innerHTML = '<td><input type="text" class="item-name" placeholder="品名"></td><td><input type="number" class="item-qty" value="1" min="1"></td><td><input type="number" class="item-price" value="0" min="0"></td><td><button class="btn btn-remove" onclick="removeItem(this)">削除</button></td>';
+  document.getElementById('items-body').appendChild(tr);
+}
+function removeItem(btn){
+  const rows = document.querySelectorAll('#items-body tr');
+  if(rows.length>1) btn.closest('tr').remove();
+}
+function fmt(n){return n.toLocaleString('ja-JP')+'円'}
+function preview(){
+  // Check if premium (via URL param after Stripe redirect)
+  const params = new URLSearchParams(window.location.search);
+  const isPremium = params.has('premium');
+
+  document.getElementById('p-number').textContent = document.getElementById('inv-number').value;
+  document.getElementById('p-date').textContent = document.getElementById('inv-date').value;
+  document.getElementById('p-due').textContent = document.getElementById('inv-due').value;
+  document.getElementById('p-to-name').textContent = document.getElementById('to-name').value + ' 御中';
+  document.getElementById('p-to-person').textContent = document.getElementById('to-person').value;
+  document.getElementById('p-to-address').textContent = document.getElementById('to-address').value;
+  document.getElementById('p-from-name').textContent = document.getElementById('from-name').value;
+  document.getElementById('p-from-person').textContent = document.getElementById('from-person').value;
+  document.getElementById('p-from-address').textContent = document.getElementById('from-address').value;
+  document.getElementById('p-from-tel').textContent = document.getElementById('from-tel').value;
+  document.getElementById('p-from-email').textContent = document.getElementById('from-email').value;
+  document.getElementById('p-bank').textContent = document.getElementById('from-bank').value;
+  document.getElementById('p-notes').textContent = document.getElementById('inv-notes').value;
+
+  const taxRate = parseFloat(document.getElementById('inv-tax').value)||0;
+  document.getElementById('p-tax-rate').textContent = taxRate;
+
+  const rows = document.querySelectorAll('#items-body tr');
+  let subtotal = 0;
+  let itemsHTML = '';
+  rows.forEach(row=>{
+    const name = row.querySelector('.item-name').value;
+    const qty = parseInt(row.querySelector('.item-qty').value)||0;
+    const price = parseInt(row.querySelector('.item-price').value)||0;
+    const amount = qty * price;
+    subtotal += amount;
+    itemsHTML += '<tr><td>'+name+'</td><td style="text-align:right">'+qty+'</td><td style="text-align:right">'+fmt(price)+'</td><td style="text-align:right">'+fmt(amount)+'</td></tr>';
+  });
+  document.getElementById('p-items').innerHTML = itemsHTML;
+  const tax = Math.floor(subtotal * taxRate / 100);
+  document.getElementById('p-subtotal').textContent = fmt(subtotal);
+  document.getElementById('p-tax').textContent = fmt(tax);
+  document.getElementById('p-total').textContent = fmt(subtotal + tax);
+
+  // Watermark
+  document.getElementById('watermark-text').style.display = isPremium ? 'none' : 'block';
+
+  document.getElementById('form-area').style.display = 'none';
+  document.getElementById('invoice-preview').style.display = 'block';
+}
+function backToForm(){
+  document.getElementById('form-area').style.display = 'block';
+  document.getElementById('invoice-preview').style.display = 'none';
+}
+</script>
+</body>
+</html>
