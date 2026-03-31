@@ -25,33 +25,34 @@
   }
 }
 </script>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;color:#1a1a2e;background:#f8f9fa;line-height:1.6}
-.hero{background:linear-gradient(135deg,#0f3460 0%,#16213e 100%);color:#fff;padding:80px 20px 60px;text-align:center}
-.hero h1{font-size:2.2rem;margin-bottom:12px;font-weight:700}
-.hero p{font-size:1.1rem;opacity:.85;max-width:600px;margin:0 auto}
-.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px;max-width:1000px;margin:-40px auto 60px;padding:0 20px}
-.tool-card{background:#fff;border-radius:12px;padding:32px 28px;box-shadow:0 4px 20px rgba(0,0,0,.08);transition:transform .2s,box-shadow .2s;text-decoration:none;color:inherit;display:flex;flex-direction:column}
-.tool-card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,.12)}
-.tool-icon{font-size:2.4rem;margin-bottom:16px}
-.tool-card h2{font-size:1.3rem;margin-bottom:8px;color:#0f3460}
-.tool-card p{font-size:.95rem;color:#555;flex:1}
-.tool-card .price{margin-top:16px;display:flex;align-items:center;gap:12px}
-.badge-free{background:#e8f5e9;color:#2e7d32;padding:4px 12px;border-radius:20px;font-size:.8rem;font-weight:600}
-.badge-premium{background:#fff3e0;color:#e65100;padding:4px 12px;border-radius:20px;font-size:.8rem;font-weight:600}
-.cta-btn{display:inline-block;margin-top:16px;padding:10px 24px;background:#0f3460;color:#fff;border-radius:8px;font-weight:600;font-size:.95rem;text-align:center}
-footer{text-align:center;padding:40px 20px;color:#888;font-size:.85rem;border-top:1px solid #eee}
-.ad-space{max-width:1000px;margin:0 auto 40px;padding:0 20px;text-align:center}
-</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5536232737607009" crossorigin="anonymous"></script>
 </head>
 <body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="site-logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      便利ツール
+    </a>
+    <nav class="site-nav">
+      <a href="/tools/invoice-pdf/">請求書</a>
+      <a href="/tools/resume-maker/">履歴書</a>
+      <a href="/tools/business-card/">名刺</a>
+    </nav>
+  </div>
+</header>
+
 <div class="hero">
-  <h1>便利ツール</h1>
-  <p>ビジネス書類をかんたん作成。ブラウザだけで完結、ダウンロード不要。</p>
+  <h1>ビジネス書類をかんたん作成</h1>
+  <p>ブラウザだけで完結。テンプレートを選んで入力するだけで、プロ品質の書類が完成します。</p>
 </div>
-<div class="tools">
+
+<div class="tools-grid">
   <a href="tools/invoice-pdf/" class="tool-card">
     <div class="tool-icon">&#128196;</div>
     <h2>請求書PDF作成ツール</h2>
@@ -83,10 +84,12 @@ footer{text-align:center;padding:40px 20px;color:#888;font-size:.85rem;border-to
     <span class="cta-btn">名刺を作成する</span>
   </a>
 </div>
-<div class="ad-space">
+
+<div class="ad-space" style="max-width:1100px;margin:0 auto 40px;padding:0 24px">
   <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5536232737607009" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
   <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
 </div>
+
 <footer>
   <p>&copy; 2026 便利ツール All rights reserved.</p>
 </footer>

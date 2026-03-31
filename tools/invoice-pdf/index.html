@@ -23,92 +23,31 @@
   ]
 }
 </script>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;color:#1a1a2e;background:#f8f9fa;line-height:1.6}
-header{background:linear-gradient(135deg,#0f3460,#16213e);color:#fff;padding:24px 20px;display:flex;align-items:center;gap:16px}
-header a{color:#fff;text-decoration:none;opacity:.7;font-size:.9rem}
-header h1{font-size:1.4rem}
-.container{max-width:900px;margin:0 auto;padding:24px 20px}
-.form-section{background:#fff;border-radius:10px;padding:28px;margin-bottom:24px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
-.form-section h2{font-size:1.1rem;color:#0f3460;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #e3e8f0}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px}
-.form-row.full{grid-template-columns:1fr}
-label{display:block;font-size:.85rem;font-weight:600;color:#555;margin-bottom:4px}
-input,textarea,select{width:100%;padding:10px 12px;border:1px solid #d0d5dd;border-radius:6px;font-size:.95rem;font-family:inherit}
-input:focus,textarea:focus{outline:none;border-color:#0f3460;box-shadow:0 0 0 3px rgba(15,52,96,.1)}
-.items-table{width:100%;border-collapse:collapse;margin-top:12px}
-.items-table th{text-align:left;padding:8px 10px;background:#f0f3f8;font-size:.8rem;color:#555;font-weight:600}
-.items-table td{padding:6px 4px}
-.items-table input{padding:8px;font-size:.9rem}
-.btn{padding:10px 20px;border:none;border-radius:6px;font-size:.9rem;font-weight:600;cursor:pointer;transition:background .2s}
-.btn-add{background:#e8f5e9;color:#2e7d32}.btn-add:hover{background:#c8e6c9}
-.btn-remove{background:#ffebee;color:#c62828;padding:6px 12px;font-size:.8rem}.btn-remove:hover{background:#ffcdd2}
-.btn-primary{background:#0f3460;color:#fff;padding:12px 32px;font-size:1rem}.btn-primary:hover{background:#1a4a8a}
-.btn-premium{background:linear-gradient(135deg,#e65100,#ff8f00);color:#fff;padding:12px 32px;font-size:1rem;text-decoration:none;display:inline-block;border-radius:6px;font-weight:600}.btn-premium:hover{opacity:.9}
-.actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:24px}
-.premium-note{font-size:.85rem;color:#888;margin-top:8px}
-
-/* Preview / Print area */
-#invoice-preview{display:none}
-.invoice{max-width:800px;margin:0 auto;padding:48px;background:#fff;font-size:14px;position:relative}
-.invoice .watermark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-size:100px;color:rgba(200,0,0,.08);font-weight:900;pointer-events:none;z-index:10;letter-spacing:12px}
-.invoice-header{display:flex;justify-content:space-between;margin-bottom:32px}
-.invoice-title{font-size:28px;font-weight:700;color:#0f3460;letter-spacing:2px}
-.invoice-meta{text-align:right;color:#555;font-size:13px;line-height:1.8}
-.invoice-parties{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-bottom:32px}
-.party h3{font-size:12px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
-.party .name{font-size:18px;font-weight:700;margin-bottom:4px}
-.party .detail{font-size:13px;color:#555;line-height:1.6}
-.inv-table{width:100%;border-collapse:collapse;margin-bottom:24px}
-.inv-table th{background:#0f3460;color:#fff;padding:10px 12px;text-align:left;font-size:12px;font-weight:600}
-.inv-table td{padding:10px 12px;border-bottom:1px solid #eee;font-size:13px}
-.inv-table tr:nth-child(even){background:#f8f9fa}
-.inv-totals{text-align:right;margin-top:16px}
-.inv-totals .row{display:flex;justify-content:flex-end;gap:40px;padding:4px 0;font-size:14px}
-.inv-totals .total{font-size:20px;font-weight:700;color:#0f3460;border-top:2px solid #0f3460;padding-top:8px;margin-top:8px}
-.inv-notes{margin-top:32px;padding-top:16px;border-top:1px solid #eee;font-size:12px;color:#888}
-
-.ad-space{text-align:center;margin:24px 0}
-
-@media print{
-  body{background:#fff}
-  header,.form-section,.actions,.ad-space,.premium-note,.btn,footer{display:none!important}
-  #invoice-preview{display:block!important}
-  .invoice{padding:24px;box-shadow:none}
-}
-footer{text-align:center;padding:40px 20px;color:#888;font-size:.85rem}
-
-/* Conversion elements */
-.social-proof-bar{background:linear-gradient(135deg,#e8f5e9,#f1f8e9);border:1px solid #c8e6c9;border-radius:10px;padding:16px 24px;margin-bottom:24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.social-proof-bar .count{font-size:1.6rem;font-weight:800;color:#2e7d32}
-.social-proof-bar .label{font-size:.9rem;color:#555;line-height:1.4}
-.social-proof-bar .badge{background:#2e7d32;color:#fff;padding:4px 12px;border-radius:99px;font-size:.75rem;font-weight:700;margin-left:auto;white-space:nowrap}
-.urgency-banner{background:linear-gradient(135deg,#fff3e0,#ffe0b2);border:2px solid #ffb74d;border-radius:10px;padding:16px 24px;margin-bottom:24px;text-align:center;position:relative;overflow:hidden}
-.urgency-banner .title{font-size:1rem;font-weight:700;color:#e65100;margin-bottom:6px}
-.urgency-banner .timer{font-size:1.4rem;font-weight:800;color:#bf360c;font-variant-numeric:tabular-nums}
-.trust-badges{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:12px}
-.trust-badge{display:flex;align-items:center;gap:6px;font-size:.8rem;color:#555;background:#f5f5f5;padding:6px 12px;border-radius:6px}
-.trust-badge svg{width:16px;height:16px;fill:#4caf50}
-.premium-upgrade{background:linear-gradient(135deg,#1a237e,#283593);border-radius:14px;padding:32px;text-align:center;margin-top:24px;position:relative;overflow:hidden}
-.premium-upgrade::before{content:'';position:absolute;top:-50%;right:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,255,255,0.05),transparent 60%);pointer-events:none}
-.premium-upgrade h3{color:#fff;font-size:1.2rem;margin-bottom:8px}
-.premium-upgrade p{color:rgba(255,255,255,0.7);font-size:.9rem;margin-bottom:20px}
-.premium-upgrade .price-big{font-size:2.2rem;font-weight:900;color:#ffab00;margin-bottom:4px}
-.premium-upgrade .price-note{font-size:.8rem;color:rgba(255,255,255,0.5);margin-bottom:16px}
-.btn-premium-big{background:linear-gradient(135deg,#ff6d00,#ff8f00);color:#fff;padding:16px 40px;font-size:1.1rem;text-decoration:none;display:inline-block;border-radius:10px;font-weight:700;box-shadow:0 4px 20px rgba(255,109,0,0.4);transition:all .3s ease}
-.btn-premium-big:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,109,0,0.5)}
-</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5536232737607009" crossorigin="anonymous"></script>
 </head>
 <body>
-<header>
-  <a href="../../">&larr; ツール一覧</a>
-  <h1>請求書PDF作成ツール</h1>
+
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="site-logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      便利ツール
+    </a>
+    <nav class="site-nav">
+      <a href="/tools/invoice-pdf/">請求書</a>
+      <a href="/tools/resume-maker/">履歴書</a>
+      <a href="/tools/business-card/">名刺</a>
+    </nav>
+  </div>
 </header>
+
 <div class="container" id="form-area">
   <!-- Social Proof -->
-  <div class="social-proof-bar">
+  <div class="social-proof-bar" style="margin-top:24px">
     <div class="count" id="user-count"></div>
     <div class="label"><strong>人がこのツールを利用</strong><br>今月の利用者数</div>
     <div class="badge">人気ツール</div>
@@ -116,7 +55,7 @@ footer{text-align:center;padding:40px 20px;color:#888;font-size:.85rem}
 
   <!-- Urgency Banner -->
   <div class="urgency-banner">
-    <div class="title">本日限定 — プレミアムPDFが特別価格</div>
+    <div class="title">期間限定 — プレミアムPDFが特別価格</div>
     <div class="timer" id="countdown-timer">--:--:--</div>
   </div>
 
@@ -171,7 +110,7 @@ footer{text-align:center;padding:40px 20px;color:#888;font-size:.85rem}
         </tr>
       </tbody>
     </table>
-    <button class="btn btn-add" onclick="addItem()" style="margin-top:12px">＋ 品目を追加</button>
+    <button class="btn btn-add" onclick="addItem()" style="margin-top:12px">+ 品目を追加</button>
   </div>
   <div class="form-section">
     <h2>備考</h2>
@@ -190,66 +129,68 @@ footer{text-align:center;padding:40px 20px;color:#888;font-size:.85rem}
     <div class="price-big">&yen;300</div>
     <div class="price-note">買い切り・追加料金なし</div>
     <a href="https://buy.stripe.com/cNifZa3DKbS02tz9PCaVa04" class="btn-premium-big" target="_blank">透かし無しPDFを取得する</a>
-    <div class="trust-badges" style="justify-content:center;margin-top:16px">
-      <div class="trust-badge" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.8)">
-        <svg viewBox="0 0 24 24" fill="#4caf50"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+    <div class="trust-badges">
+      <div class="trust-badge">
+        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
         Stripe安全決済
       </div>
-      <div class="trust-badge" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.8)">
-        <svg viewBox="0 0 24 24" fill="#4caf50"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+      <div class="trust-badge">
+        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
         即座にダウンロード
       </div>
     </div>
   </div>
-  <p class="premium-note">※ 無料版はプレビュー・印刷時に「SAMPLE」透かしが入ります。プレミアム購入後、透かし無しで再印刷できます。</p>
+  <p class="premium-note" style="text-align:center">※ 無料版はプレビュー・印刷時に「SAMPLE」透かしが入ります。プレミアム購入後、透かし無しで再印刷できます。</p>
 </div>
 
-<div id="invoice-preview">
-  <div class="invoice" id="invoice-doc">
-    <div class="watermark" id="watermark-text">SAMPLE</div>
-    <div class="invoice-header">
-      <div class="invoice-title">請 求 書</div>
-      <div class="invoice-meta">
-        <div>No. <span id="p-number"></span></div>
-        <div>発行日: <span id="p-date"></span></div>
-        <div>支払期限: <span id="p-due"></span></div>
+<div id="invoice-preview" style="display:none">
+  <div class="preview-frame" style="max-width:850px;margin:24px auto">
+    <div class="invoice" id="invoice-doc">
+      <div class="watermark" id="watermark-text">SAMPLE</div>
+      <div class="invoice-header">
+        <div class="invoice-title">請 求 書</div>
+        <div class="invoice-meta">
+          <div>No. <span id="p-number"></span></div>
+          <div>発行日: <span id="p-date"></span></div>
+          <div>支払期限: <span id="p-due"></span></div>
+        </div>
       </div>
-    </div>
-    <div class="invoice-parties">
-      <div class="party">
-        <h3>請求先</h3>
-        <div class="name" id="p-to-name"></div>
-        <div class="detail"><span id="p-to-person"></span></div>
-        <div class="detail" id="p-to-address"></div>
+      <div class="invoice-parties">
+        <div class="party">
+          <h3>請求先</h3>
+          <div class="name" id="p-to-name"></div>
+          <div class="detail"><span id="p-to-person"></span></div>
+          <div class="detail" id="p-to-address"></div>
+        </div>
+        <div class="party">
+          <h3>請求元</h3>
+          <div class="name" id="p-from-name"></div>
+          <div class="detail" id="p-from-person"></div>
+          <div class="detail" id="p-from-address"></div>
+          <div class="detail" id="p-from-tel"></div>
+          <div class="detail" id="p-from-email"></div>
+        </div>
       </div>
-      <div class="party">
-        <h3>請求元</h3>
-        <div class="name" id="p-from-name"></div>
-        <div class="detail" id="p-from-person"></div>
-        <div class="detail" id="p-from-address"></div>
-        <div class="detail" id="p-from-tel"></div>
-        <div class="detail" id="p-from-email"></div>
+      <table class="inv-table">
+        <thead><tr><th>品名</th><th style="width:80px;text-align:right">数量</th><th style="width:120px;text-align:right">単価</th><th style="width:120px;text-align:right">金額</th></tr></thead>
+        <tbody id="p-items"></tbody>
+      </table>
+      <div class="inv-totals">
+        <div class="row"><span>小計</span><span id="p-subtotal"></span></div>
+        <div class="row"><span>消費税（<span id="p-tax-rate"></span>%）</span><span id="p-tax"></span></div>
+        <div class="row total"><span>合計</span><span id="p-total"></span></div>
       </div>
-    </div>
-    <table class="inv-table">
-      <thead><tr><th>品名</th><th style="width:80px;text-align:right">数量</th><th style="width:120px;text-align:right">単価</th><th style="width:120px;text-align:right">金額</th></tr></thead>
-      <tbody id="p-items"></tbody>
-    </table>
-    <div class="inv-totals">
-      <div class="row"><span>小計</span><span id="p-subtotal"></span></div>
-      <div class="row"><span>消費税（<span id="p-tax-rate"></span>%）</span><span id="p-tax"></span></div>
-      <div class="row total"><span>合計</span><span id="p-total"></span></div>
-    </div>
-    <div class="inv-notes">
-      <strong>振込先:</strong> <span id="p-bank"></span><br>
-      <span id="p-notes"></span>
+      <div class="inv-notes">
+        <strong>振込先:</strong> <span id="p-bank"></span><br>
+        <span id="p-notes"></span>
+      </div>
     </div>
   </div>
   <div style="text-align:center;padding:24px" class="no-print">
     <button class="btn btn-primary" onclick="window.print()">この内容を印刷 / PDF保存</button>
-    <button class="btn" style="background:#eee;margin-left:12px" onclick="backToForm()">フォームに戻る</button>
+    <button class="btn btn-secondary" style="margin-left:12px" onclick="backToForm()">フォームに戻る</button>
     <div style="margin-top:16px">
-      <a href="https://buy.stripe.com/cNifZa3DKbS02tz9PCaVa04" class="btn-premium" target="_blank">¥300 で透かし無し版を取得</a>
+      <a href="https://buy.stripe.com/cNifZa3DKbS02tz9PCaVa04" class="btn-premium" target="_blank">&yen;300 で透かし無し版を取得</a>
     </div>
   </div>
 </div>
@@ -258,7 +199,10 @@ footer{text-align:center;padding:40px 20px;color:#888;font-size:.85rem}
   <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5536232737607009" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
   <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
 </div>
-<footer><p>&copy; 2026 便利ツール &mdash; <a href="../../">トップに戻る</a></p></footer>
+
+<footer>
+  <p>&copy; 2026 便利ツール &mdash; <a href="/">トップに戻る</a></p>
+</footer>
 
 <script>
 // Social proof: realistic user count based on date
@@ -266,7 +210,6 @@ footer{text-align:center;padding:40px 20px;color:#888;font-size:.85rem}
   const now = new Date();
   const dayOfMonth = now.getDate();
   const month = now.getMonth();
-  // Base count increases daily, varies by month seed
   const base = 340 + (month * 37) % 100;
   const daily = Math.floor(dayOfMonth * 8.7 + (dayOfMonth * 13) % 20);
   const count = base + daily;
@@ -307,7 +250,6 @@ function removeItem(btn){
 }
 function fmt(n){return n.toLocaleString('ja-JP')+'円'}
 function preview(){
-  // Check if premium (via URL param after Stripe redirect)
   const params = new URLSearchParams(window.location.search);
   const isPremium = params.has('premium');
 
@@ -345,7 +287,6 @@ function preview(){
   document.getElementById('p-tax').textContent = fmt(tax);
   document.getElementById('p-total').textContent = fmt(subtotal + tax);
 
-  // Watermark
   document.getElementById('watermark-text').style.display = isPremium ? 'none' : 'block';
 
   document.getElementById('form-area').style.display = 'none';
