@@ -878,10 +878,7 @@ canvas {
 }
 
 /* ========== Ad Space ========== */
-.ad-space {
-  text-align: center;
-  margin:8px auto;
-}
+
 .ad-space ins {
   display: block;
 }
