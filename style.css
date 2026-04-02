@@ -340,7 +340,7 @@ input::placeholder, textarea::placeholder {
 .btn-remove {
   background: var(--red-light);
   color: var(--red);
-  padding: 8px 12px;
+  padding:0 12px;
   font-size: var(--text-xs);
   min-height: 36px;
 }
@@ -391,7 +391,7 @@ input::placeholder, textarea::placeholder {
   border-bottom: 2px solid var(--gray-200);
 }
 .items-table td {
-  padding: 8px 4px;
+  padding:0 4px;
 }
 .items-table input {
   padding: 10px 12px;
@@ -554,7 +554,7 @@ input::placeholder, textarea::placeholder {
   font-size: var(--text-xs);
   color: rgba(255,255,255,0.85);
   background: rgba(255,255,255,0.1);
-  padding: 8px 14px;
+  padding:0 14px;
   border-radius: var(--radius);
   backdrop-filter: blur(4px);
 }
@@ -766,7 +766,7 @@ input::placeholder, textarea::placeholder {
 }
 .r-table th, .r-table td {
   border: 1px solid var(--gray-400);
-  padding: 8px 10px;
+  padding:0 10px;
   text-align: left;
   font-size: 12px;
 }
@@ -880,7 +880,7 @@ canvas {
 /* ========== Ad Space ========== */
 .ad-space {
   text-align: center;
-  margin: 24px 0;
+  margin:8px auto;
 }
 .ad-space ins {
   display: block;
