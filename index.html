@@ -3,246 +3,151 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>便利ツール — ビジネス書類をかんたん作成</title>
-<meta name="description" content="請求書・履歴書・名刺をブラウザだけで無料作成。テンプレートを選んで入力するだけ。プレミアム版でウォーターマーク無しのPDFダウンロードも。">
-<meta name="keywords" content="請求書 作成 無料, 履歴書 テンプレート, 名刺 デザイン, ビジネス書類, PDF作成">
-<link rel="canonical" href="https://micro-tools.vercel.app/">
-<meta property="og:title" content="便利ツール — ビジネス書類をかんたん作成">
+<title>Micro Tools — ビジネス書類をかんたん作成 | Mild Solt</title>
+<meta name="description" content="請求書・履歴書・名刺をブラウザだけで無料作成。データは端末内で完結、安全・安心のビジネス書類作成ツール。">
+<link rel="canonical" href="https://micro.mildsolt.jp/">
+<meta property="og:title" content="Micro Tools — ビジネス書類をかんたん作成">
 <meta property="og:description" content="請求書・履歴書・名刺をブラウザだけで無料作成。">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://micro-tools.vercel.app/">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "便利ツール",
-  "url": "https://micro-tools.vercel.app/",
-  "description": "ビジネス書類をかんたん作成",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://micro-tools.vercel.app/?q={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "請求書に必要な項目は何ですか？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "請求書に必要な項目は、発行者名・取引年月日・取引内容・金額・交付先の5つが基本です。インボイス制度対応の場合は、登録番号・適用税率・税率ごとの消費税額も必要です。当ツールではこれらすべてを自動で含むテンプレートを提供しています。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "履歴書のフォーマットはJIS規格に対応していますか？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "はい、当ツールの履歴書メーカーはJIS規格（日本産業規格）に準拠したフォーマットで作成できます。学歴・職歴・資格・志望動機などの標準的な項目をすべてカバーしており、転職・就職活動にそのまま使用できます。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "作成した書類のデータは安全ですか？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "はい、すべての書類作成処理はお使いのブラウザ内で完結しており、入力データが外部サーバーに送信されることはありません。個人情報や取引情報は端末から出ないため、安心してご利用いただけます。"
-      }
-    }
-  ]
-}
-</script>
+<meta property="og:url" content="https://micro.mildsolt.jp/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"請求書に必要な項目は？","acceptedAnswer":{"@type":"Answer","text":"発行者名・取引年月日・取引内容・金額・交付先が基本。インボイス制度対応の場合は登録番号・適用税率・消費税額も必要です。"}},{"@type":"Question","name":"データは安全？","acceptedAnswer":{"@type":"Answer","text":"全処理がブラウザ内で完結。データは外部サーバーに送信されません。"}},{"@type":"Question","name":"無料版とプレミアム版の違いは？","acceptedAnswer":{"@type":"Answer","text":"無料版はウォーターマーク付き。プレミアム版は透かしなしPDFをダウンロードできます。"}}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5536232737607009" crossorigin="anonymous"></script>
 <style>
-:root {
-  --bg: #0f1219;
-  --surface: #161b26;
-  --card: #1c2333;
-  --border: rgba(255,255,255,0.06);
-  --text: #e4e8f1;
-  --text-muted: #8892a6;
-  --accent: #06b6d4;
-  --accent-dim: rgba(6,182,212,0.12);
-  --accent-glow: rgba(6,182,212,0.25);
-  --radius: 12px;
-}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
-h1,h2,h3{font-family:'Space Grotesk','Noto Sans JP',sans-serif}
-a{color:var(--accent);text-decoration:none}
-
-.site-header{background:var(--surface);border-bottom:1px solid var(--border);padding:16px 24px;position:sticky;top:0;z-index:100}
-.header-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
-.site-logo{font-family:'Space Grotesk','Noto Sans JP',sans-serif;font-weight:700;font-size:1.15rem;color:var(--text);display:flex;align-items:center;gap:8px}
-.site-logo svg{width:20px;height:20px;color:var(--accent)}
-.site-nav{display:flex;gap:18px}
-.site-nav a{color:var(--text-muted);font-size:.85rem;font-weight:500;transition:color .2s}
-.site-nav a:hover{color:var(--accent)}
-
-.container{max-width:1000px;margin:0 auto;padding:0 24px}
-
-.hero{text-align:center;padding:56px 24px 28px}
-.hero-tag{display:inline-block;font-family:'Space Grotesk',sans-serif;font-size:.75rem;font-weight:600;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;margin-bottom:16px}
-.hero h1{font-size:2.2rem;font-weight:700;margin-bottom:16px}
-.hero p{font-size:1.05rem;color:var(--text-muted);max-width:600px;margin:0 auto}
-.hero-divider{width:48px;height:2px;background:var(--accent);margin:32px auto}
-
-.section-header{text-align:center;margin-bottom:32px}
-.section-tag{font-family:'Space Grotesk',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.12em;color:var(--accent);text-transform:uppercase;display:block;margin-bottom:8px}
-.section-header h2{font-size:1.5rem;font-weight:700;margin-bottom:12px}
-.section-line{width:40px;height:2px;background:var(--accent);margin:0 auto}
-
-.tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:0 0 28px}
-.tool-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:32px 24px;text-align:center;transition:all .3s;text-decoration:none;color:var(--text);display:block;position:relative;overflow:hidden}
-.tool-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);opacity:0;transition:opacity .3s}
-.tool-card:hover{border-color:rgba(6,182,212,.2);transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,.3)}
-.tool-card:hover::before{opacity:1}
-.tool-icon{font-size:2.8rem;margin-bottom:16px}
-.tool-card h2{font-size:1.15rem;font-weight:600;margin-bottom:10px}
-.tool-card p{color:var(--text-muted);font-size:.85rem;line-height:1.7;margin-bottom:16px}
-.price{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
-.badge-free{display:inline-block;background:rgba(52,211,153,.12);color:#34d399;padding:4px 12px;border-radius:6px;font-size:.75rem;font-weight:600}
-.badge-premium{display:inline-block;background:var(--accent-dim);color:var(--accent);padding:4px 12px;border-radius:6px;font-size:.75rem;font-weight:600}
-.cta-btn{display:inline-block;background:var(--accent);color:#fff;padding:10px 24px;border-radius:6px;font-size:.85rem;font-weight:600;transition:opacity .2s}
-.cta-btn:hover{opacity:.85;color:#fff}
-
-/* Related */
-.related-section{padding:28px 0}
-.related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-.related-card{display:block;padding:20px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);text-decoration:none;color:var(--text);transition:transform .2s}
-.related-card:hover{transform:translateY(-2px)}
-.related-card strong{color:var(--accent);display:block;margin-bottom:6px}
-.related-card p{font-size:.82rem;color:var(--text-muted)}
-
-.ad-space{background:var(--surface);border:1px dashed var(--border);border-radius:var(--radius);padding:12px;min-height:0;margin:8px auto}
-
-footer{text-align:center;padding:24px 0;color:var(--text-muted);font-size:.85rem;border-top:1px solid var(--border);margin-top:28px}
-
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
-
-@media(max-width:768px){.tools-grid{grid-template-columns:1fr}.hero h1{font-size:1.7rem}.site-nav{display:none}}
-@media(max-width:480px){.hero{padding:40px 16px 20px}}
+:root{--bg:#f8f6f1;--sf:#fff;--tx:#1a1a1a;--sub:#555;--mt:#999;--ac:#2d3a8c;--al:#4f5bd5;--ab:rgba(45,58,140,.06);--wm:#c4953a;--wb:rgba(196,149,58,.06);--gn:#059669;--gb:rgba(5,150,105,.08);--bd:rgba(0,0,0,.07);--r:14px;--mw:960px;--t:.25s cubic-bezier(.4,0,.2,1)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Zen Kaku Gothic New","Hiragino Sans",sans-serif;background:var(--bg);color:var(--tx);line-height:1.75;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:"Outfit","Zen Kaku Gothic New",sans-serif;font-weight:700;line-height:1.2;letter-spacing:-.02em}
+a{color:inherit;text-decoration:none}
+.c{max-width:var(--mw);margin:0 auto;padding:0 24px}
+header{position:sticky;top:0;z-index:100;background:rgba(248,246,241,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);padding:14px 24px}
+.hi{max-width:var(--mw);margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:"Outfit",sans-serif;font-weight:800;font-size:1.05rem;display:flex;align-items:center;gap:8px}
+.lm{width:28px;height:28px;background:linear-gradient(135deg,var(--ac),var(--al));border-radius:7px;display:flex;align-items:center;justify-content:center}
+.lm svg{width:16px;height:16px;color:#fff}
+nav{display:flex;gap:6px;align-items:center}
+nav a{font-size:.8rem;color:var(--mt);padding:6px 14px;border-radius:8px;font-weight:500;transition:all var(--t)}
+nav a:hover{color:var(--tx);background:rgba(0,0,0,.03)}
+.nb{font-size:.75rem;color:var(--ac)!important;font-weight:600;border:1px solid rgba(45,58,140,.15);border-radius:8px;padding:6px 14px}
+.hero{text-align:center;padding:72px 24px 56px}
+.lb{font-family:"Outfit",sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:16px;display:block}
+.hero h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;margin-bottom:16px}
+.hero h1 em{font-style:normal;color:var(--ac)}
+.hd{font-size:1rem;color:var(--sub);max-width:520px;margin:0 auto 28px}
+.bgs{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.bg{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:50px;font-size:.78rem;font-weight:500;border:1px solid var(--bd);background:var(--sf)}
+.bg svg{width:14px;height:14px}
+.s{padding:56px 0}
+.sh{font-size:clamp(1.3rem,3vw,1.8rem);text-align:center;margin-bottom:40px}
+.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tc{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:32px 24px;text-align:center;transition:all var(--t);display:block;position:relative;overflow:hidden}
+.tc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--ac),var(--al));opacity:0;transition:opacity var(--t)}
+.tc:hover{border-color:rgba(45,58,140,.2);transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.06)}
+.tc:hover::before{opacity:1}
+.ti{width:56px;height:56px;border-radius:14px;display:inline-flex;align-items:center;justify-content:center;margin-bottom:20px}
+.ti svg{width:24px;height:24px}
+.tc h3{font-size:1.05rem;margin-bottom:8px}
+.tc p{color:var(--sub);font-size:.85rem;line-height:1.7;margin-bottom:16px}
+.pr{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.bf{background:var(--gb);color:var(--gn);padding:4px 12px;border-radius:6px;font-size:.72rem;font-weight:600}
+.bp{background:var(--wb);color:var(--wm);padding:4px 12px;border-radius:6px;font-size:.72rem;font-weight:600}
+.cb{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--ac),var(--al));color:#fff;padding:10px 24px;border-radius:8px;font-size:.85rem;font-weight:600;transition:all var(--t)}
+.cb:hover{opacity:.9;transform:translateY(-1px);color:#fff}
+.bd{max-width:480px;margin:0 auto;background:var(--sf);border:2px solid rgba(45,58,140,.15);border-radius:var(--r);padding:32px 24px;text-align:center}
+.bb{display:inline-block;background:linear-gradient(135deg,var(--ac),var(--al));color:#fff;padding:4px 14px;border-radius:50px;font-size:.72rem;font-weight:700;margin-bottom:12px}
+.st{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;text-align:center}
+.stp{padding:24px 16px}
+.sn{width:40px;height:40px;border-radius:50%;background:var(--ab);color:var(--ac);display:inline-flex;align-items:center;justify-content:center;font-family:"Outfit",sans-serif;font-weight:800;font-size:1rem;margin-bottom:16px}
+.stp h4{font-size:.95rem;margin-bottom:6px}
+.stp p{font-size:.82rem;color:var(--sub)}
+.fg{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.fi{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:24px;display:flex;gap:14px;align-items:flex-start}
+.fc{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.fc svg{width:20px;height:20px}
+.fi h4{font-size:.88rem;margin-bottom:4px}
+.fi p{font-size:.78rem;color:var(--sub);line-height:1.65}
+.fq{max-width:640px;margin:0 auto}
+.qi{border-bottom:1px solid var(--bd);padding:20px 0}
+.qq{font-weight:600;font-size:.92rem;margin-bottom:8px;display:flex;gap:10px}
+.qq::before{content:"Q";font-family:"Outfit",sans-serif;font-weight:800;color:var(--ac);font-size:.8rem;width:24px;height:24px;border-radius:6px;background:var(--ab);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.qa{font-size:.85rem;color:var(--sub);padding-left:34px;line-height:1.75}
+.rg{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.rc{display:flex;align-items:center;gap:14px;padding:16px 18px;background:var(--sf);border:1px solid var(--bd);border-radius:10px;transition:all var(--t)}
+.rc:hover{border-color:rgba(45,58,140,.2);transform:translateY(-2px)}
+.ric{width:36px;height:36px;border-radius:8px;background:var(--ab);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ric svg{width:16px;height:16px;color:var(--ac)}
+.ri strong{font-size:.82rem;display:block;margin-bottom:1px}
+.ri span{font-size:.72rem;color:var(--mt)}
+.cs{text-align:center;padding:64px 0}
+.cs h2{font-size:1.4rem;margin-bottom:10px}
+.cs p{font-size:.88rem;color:var(--sub);margin-bottom:28px}
+footer{text-align:center;padding:28px 0;color:var(--mt);font-size:.78rem;border-top:1px solid var(--bd);margin-top:20px}
+footer a{color:var(--mt);text-decoration:underline}
+.rv{opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s}
+.rv.v{opacity:1;transform:translateY(0)}
+@media(max-width:768px){.tg,.st,.fg{grid-template-columns:1fr}.rg{grid-template-columns:1fr}nav{display:none}}
 </style>
 </head>
 <body>
-
-<header class="site-header">
-  <div class="header-inner">
-    <a href="/" class="site-logo">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-      便利ツール
-    </a>
-    <nav class="site-nav">
-      <a href="/tools/invoice-pdf/">請求書</a>
-      <a href="/tools/resume-maker/">履歴書</a>
-      <a href="/tools/business-card/">名刺</a>
-    </nav>
-  </div>
-</header>
-
-<div class="container">
-  <section class="hero">
-    <span class="hero-tag">Business Documents</span>
-    <h1>30秒で完成。プロ品質のビジネス書類</h1>
-    <div class="hero-divider"></div>
-    <p>テンプレートを選ぶだけ。請求書・履歴書・名刺をブラウザで即作成。</p>
-  </section>
-
-  <div class="section-header">
-    <span class="section-tag">Tools</span>
-    <h2>書類作成ツール</h2>
-    <div class="section-line"></div>
-  </div>
-
-  <div class="tools-grid">
-    <a href="tools/invoice-pdf/" class="tool-card reveal">
-      <div class="tool-icon">&#128196;</div>
-      <h2>請求書PDF作成ツール</h2>
-      <p>取引先情報・品目・税率を入力するだけでプロフェッショナルな請求書を作成。そのまま印刷・PDF保存が可能です。</p>
-      <div class="price">
-        <span class="badge-free">無料で使える</span>
-        <span class="badge-premium">ウォーターマークを外す ¥500</span>
-      </div>
-      <span class="cta-btn">今すぐ無料で作成</span>
-    </a>
-    <a href="tools/resume-maker/" class="tool-card reveal">
-      <div class="tool-icon">&#128221;</div>
-      <h2>履歴書メーカー</h2>
-      <p>JIS規格準拠のフォーマットで履歴書を作成。学歴・職歴・資格を入力してすぐにプレビュー。転職・就活に。</p>
-      <div class="price">
-        <span class="badge-free">無料で使える</span>
-        <span class="badge-premium">ウォーターマークを外す ¥500</span>
-      </div>
-      <span class="cta-btn">今すぐ無料で作成</span>
-    </a>
-    <a href="tools/business-card/" class="tool-card reveal">
-      <div class="tool-icon">&#127380;</div>
-      <h2>名刺デザイナー</h2>
-      <p>3種類のテンプレートから選んで名刺をデザイン。名前・肩書き・連絡先を入力するだけで即プレビュー。</p>
-      <div class="price">
-        <span class="badge-free">無料で使える</span>
-        <span class="badge-premium">ウォーターマークを外す ¥500</span>
-      </div>
-      <span class="cta-btn">今すぐ無料で作成</span>
-    </a>
-  </div>
-
-  <div style="max-width:480px;margin:0 auto 28px;background:linear-gradient(135deg,#1c2333,#1e2a3a);border:1px solid rgba(6,182,212,.25);border-radius:var(--radius);padding:32px 24px;text-align:center;box-shadow:0 4px 24px rgba(6,182,212,.08)">
-    <div style="font-size:1.6rem;margin-bottom:8px">🎁</div>
-    <h2 style="font-size:1.2rem;font-weight:700;margin-bottom:8px">全ツールセット</h2>
-    <p style="color:var(--text-muted);font-size:.85rem;margin-bottom:16px">請求書・履歴書・名刺 — 3ツール全部使い放題。個別購入より<strong style="color:var(--accent)">¥520おトク</strong>。</p>
-    <div style="margin-bottom:14px"><span class="badge-premium" style="font-size:.9rem;padding:6px 16px">¥980</span></div>
-    <a href="#" class="cta-btn" style="display:inline-block">全ツールセットを購入</a>
-  </div>
-
-  <section class="related-section">
-    <div class="section-header">
-      <span class="section-tag">Related</span>
-      <h2>関連ツール</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="related-grid">
-      <a href="https://tax-tools.vercel.app/" class="related-card reveal">
-        <strong>税金シミュレーター</strong>
-        <p>確定申告・インボイスの税額を無料計算。フリーランス必携。</p>
-      </a>
-      <a href="https://estimate-generator-three.vercel.app/" class="related-card reveal">
-        <strong>AI見積書ジェネレーター</strong>
-        <p>AIが見積書を自動生成。書類作成の効率化に。</p>
-      </a>
-      <a href="https://seo-tools-site-topaz.vercel.app/" class="related-card reveal">
-        <strong>無料計算ツール集</strong>
-        <p>利益計算・BMI・日数計算など30種以上の無料ツール。</p>
-      </a>
-      <a href="https://shindan.mildsolt.com/" class="related-card reveal">
-        <strong>無料診断ツール集</strong>
-        <p>性格診断・恋愛相性・ストレスチェックなど12の診断。</p>
-      </a>
-    </div>
-  </section>
-<footer>
-    <p>&copy; 2026 便利ツール All rights reserved.</p>
-    <p style="margin-top:8px"><a href="https://mildsolt-ai.vercel.app/tokushoho.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">特定商取引法に基づく表記</a></p>
-  </footer>
+<header><div class="hi">
+<a href="/" class="logo"><span class="lm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>Micro Tools</a>
+<nav><a href="/tools/invoice-pdf/">請求書</a><a href="/tools/resume-maker/">履歴書</a><a href="/tools/business-card/">名刺</a><a href="https://mildsolt.jp" class="nb">Mild Solt</a></nav>
+</div></header>
+<div class="c">
+<section class="hero">
+<span class="lb rv">Business Documents</span>
+<h1 class="rv"><em>30秒</em>で完成。プロ品質のビジネス書類</h1>
+<p class="hd rv">テンプレートを選んで入力するだけ。請求書・履歴書・名刺をブラウザで即作成。<br>データは端末から出ないので安心です。</p>
+<div class="bgs rv">
+<span class="bg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>データ端末完結</span>
+<span class="bg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>登録不要</span>
+<span class="bg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>完全無料</span>
 </div>
-
-<script>
-(function(){
-  var observer = new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}
-    });
-  },{threshold:0.1});
-  document.querySelectorAll('.reveal').forEach(function(el){observer.observe(el)});
-})();
-</script>
+</section>
+<section class="s">
+<span class="lb rv" style="text-align:center">Tools</span>
+<h2 class="sh rv">3つのビジネス書類ツール</h2>
+<div class="tg">
+<a href="tools/invoice-pdf/" class="tc rv"><div class="ti" style="background:var(--ab)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--ac)" stroke-width="2"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M2 9h20"/><path d="M10 3v18"/></svg></div><h3>請求書PDF作成</h3><p>取引先情報・品目・税率を入力するだけ。インボイス制度に完全対応したプロフェッショナルな請求書を作成・印刷できます。</p><div class="pr"><span class="bf">無料</span><span class="bp">プレミアム ¥300</span></div><span class="cb">無料で作成 &rarr;</span></a>
+<a href="tools/resume-maker/" class="tc rv"><div class="ti" style="background:var(--gb)"><svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>履歴書メーカー</h3><p>JIS規格準拠のフォーマット。学歴・職歴・資格・志望動機を入力してすぐにプレビュー＆印刷。転職・就活に最適。</p><div class="pr"><span class="bf">無料</span><span class="bp">プレミアム ¥500</span></div><span class="cb">無料で作成 &rarr;</span></a>
+<a href="tools/business-card/" class="tc rv"><div class="ti" style="background:var(--wb)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--wm)" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 12h2"/><path d="M7 16h6"/><circle cx="16" cy="10" r="2"/></svg></div><h3>名刺デザイナー</h3><p>3種類のテンプレートから選んで名刺をデザイン。名前・肩書き・連絡先を入力するだけで印刷可能な名刺が即完成。</p><div class="pr"><span class="bf">無料</span><span class="bp">プレミアム ¥200</span></div><span class="cb">無料で作成 &rarr;</span></a>
+</div>
+</section>
+<div class="bd rv"><div class="bb">おトクなセット</div><h3 style="font-size:1.15rem;margin-bottom:6px">全ツールセット</h3><p style="color:var(--sub);font-size:.85rem;margin-bottom:16px">3ツール全部使い放題。個別購入より<strong style="color:var(--ac)">¥520おトク</strong></p><div style="margin-bottom:16px"><span class="bp" style="font-size:.95rem;padding:6px 20px">¥980</span></div><a href="#" class="cb">セットを購入 &rarr;</a></div>
+<section class="s"><span class="lb rv" style="text-align:center">How It Works</span><h2 class="sh rv">かんたん3ステップ</h2>
+<div class="st rv">
+<div class="stp"><div class="sn">1</div><h4>ツールを選ぶ</h4><p>請求書・履歴書・名刺から選択</p></div>
+<div class="stp"><div class="sn">2</div><h4>情報を入力</h4><p>テンプレートに沿って入力するだけ</p></div>
+<div class="stp"><div class="sn">3</div><h4>印刷 / PDF保存</h4><p>そのまま印刷またはPDF保存。30秒で完成</p></div>
+</div></section>
+<section class="s"><span class="lb rv" style="text-align:center">Features</span><h2 class="sh rv">選ばれる理由</h2>
+<div class="fg">
+<div class="fi rv"><div class="fc" style="background:var(--ab)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--ac)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><h4>データは端末から出ない</h4><p>全処理がブラウザ内で完結。個人情報が外部送信されることはありません。</p></div></div>
+<div class="fi rv"><div class="fc" style="background:var(--gb)"><svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div><h4>インボイス制度対応</h4><p>登録番号・税率区分・消費税額を正しく記載。適格請求書に完全対応。</p></div></div>
+<div class="fi rv"><div class="fc" style="background:var(--wb)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--wm)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div><h4>登録不要・即利用</h4><p>アカウント不要。ページを開いてすぐに使えます。</p></div></div>
+<div class="fi rv"><div class="fc" style="background:var(--ab)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--ac)" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div><div><h4>スマホ対応</h4><p>レスポンシブ対応。外出先でも快適に書類作成。</p></div></div>
+<div class="fi rv"><div class="fc" style="background:var(--gb)"><svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><div><h4>JIS規格準拠</h4><p>履歴書はJIS規格対応。転職・就活にそのまま使えます。</p></div></div>
+<div class="fi rv"><div class="fc" style="background:var(--wb)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--wm)" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div><h4>基本無料</h4><p>全機能無料。プレミアムも¥200〜¥500の買い切り。</p></div></div>
+</div></section>
+<section class="s"><span class="lb rv" style="text-align:center">FAQ</span><h2 class="sh rv">よくある質問</h2>
+<div class="fq">
+<div class="qi rv"><div class="qq">請求書に必要な項目は？</div><div class="qa">発行者名・取引年月日・取引内容・金額・交付先が基本。インボイス制度対応の場合は登録番号・税率・消費税額も必要です。当ツールでは全て自動で含みます。</div></div>
+<div class="qi rv"><div class="qq">データは安全ですか？</div><div class="qa">はい。全処理がブラウザ内で完結し、データは外部サーバーに送信されません。</div></div>
+<div class="qi rv"><div class="qq">無料版とプレミアム版の違いは？</div><div class="qa">無料版はウォーターマーク付き。プレミアム版は透かしなしPDFをダウンロード可能。機能は同じで買い切りです。</div></div>
+<div class="qi rv"><div class="qq">JIS規格に対応していますか？</div><div class="qa">はい。JIS規格準拠のフォーマットで、転職・就活にそのまま使えます。</div></div>
+</div></section>
+<section class="s"><span class="lb rv" style="text-align:center">Related</span><h2 class="sh rv">関連ツール</h2>
+<div class="rg rv">
+<a href="https://tax.mildsolt.jp/" class="rc"><div class="ric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div class="ri"><strong>税金シミュレーター</strong><span>確定申告・インボイス税額計算</span></div></a>
+<a href="https://estimate.mildsolt.jp/" class="rc"><div class="ric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="ri"><strong>AI見積書ジェネレーター</strong><span>AIで見積書・請求書を自動生成</span></div></a>
+<a href="https://tools.mildsolt.jp/" class="rc"><div class="ric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg></div><div class="ri"><strong>無料計算ツール集</strong><span>利益計算・BMI・日数計算25種以上</span></div></a>
+<a href="https://shindan.mildsolt.jp/" class="rc"><div class="ric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><div class="ri"><strong>無料診断ツール集</strong><span>性格診断・恋愛相性14の診断</span></div></a>
+</div></section>
+<section class="cs"><h2 class="rv">まずは無料で使ってみませんか？</h2><p class="rv">アカウント登録不要。すぐに書類作成を始められます。</p><a href="tools/invoice-pdf/" class="cb rv" style="font-size:.92rem;padding:14px 32px">請求書を無料で作成 &rarr;</a></section>
+<footer>&copy; 2026 Micro Tools by <a href="https://mildsolt.jp">Mild Solt</a> | <a href="https://mildsolt.jp/tokushoho.html">特定商取引法</a></footer>
+</div>
+<script>!function(){var o=new IntersectionObserver(function(e){e.forEach(function(e){e.isIntersecting&&(e.target.classList.add('v'),o.unobserve(e.target))})},{threshold:.1});document.querySelectorAll('.rv').forEach(function(e){o.observe(e)})}()</script>
 </body>
 </html>
